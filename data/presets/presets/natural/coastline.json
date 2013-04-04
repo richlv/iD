@@ -1,5 +1,4 @@
 {
-    "name": "coastline",
     "geometry": [
         "line"
     ],
@@ -8,5 +7,6 @@
     ],
     "tags": {
         "natural": "coastline"
-    }
+    },
+    "name": "Coastline"
 }

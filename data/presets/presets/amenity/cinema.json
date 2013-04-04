@@ -1,5 +1,4 @@
 {
-    "name": "cinema",
     "icon": "cinema",
     "fields": [
         "building_area",
@@ -7,6 +6,7 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "terms": [
@@ -30,5 +30,6 @@
     ],
     "tags": {
         "amenity": "cinema"
-    }
+    },
+    "name": "Cinema"
 }

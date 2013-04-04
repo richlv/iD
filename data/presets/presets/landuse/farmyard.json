@@ -1,5 +1,4 @@
 {
-    "name": "farmyard",
     "geometry": [
         "point",
         "area"
@@ -7,5 +6,6 @@
     "tags": {
         "landuse": "farmyard"
     },
-    "terms": []
+    "terms": [],
+    "name": "Farmyard"
 }

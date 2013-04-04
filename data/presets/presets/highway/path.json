@@ -1,9 +1,8 @@
 {
-    "name": "path",
-    "icon": "highway-footway",
+    "icon": "highway-path",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"
@@ -14,5 +13,6 @@
     "tags": {
         "highway": "path"
     },
-    "terms": []
+    "terms": [],
+    "name": "Path"
 }

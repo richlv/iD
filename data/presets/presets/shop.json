@@ -1,5 +1,4 @@
 {
-    "name": "shop",
     "icon": "shop",
     "fields": [
         "shop",
@@ -8,10 +7,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "shop": "*"
     },
-    "terms": []
+    "terms": [],
+    "name": "Shop"
 }

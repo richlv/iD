@@ -1,10 +1,10 @@
 {
-    "name": "playground",
     "geometry": [
         "point",
         "area"
     ],
     "tags": {
         "leisure": "playground"
-    }
+    },
+    "name": "Playground"
 }

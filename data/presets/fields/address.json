@@ -6,5 +6,15 @@
         "addr:street",
         "addr:city"
     ],
-    "universal": true
+    "icon": "address",
+    "universal": true,
+    "label": "Address",
+    "strings": {
+        "placeholders": {
+          "housename": "Housename",
+          "number": "123",
+          "street": "Street",
+          "city": "City"
+        }
+    }
 }

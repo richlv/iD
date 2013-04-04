@@ -1,5 +1,4 @@
 {
-    "name": "waterway",
     "fields": [
         "waterway"
     ],
@@ -11,5 +10,6 @@
     ],
     "tags": {
         "waterway": "*"
-    }
+    },
+    "name": "Waterway"
 }

@@ -1,5 +1,4 @@
 {
-    "name": "university",
     "icon": "college",
     "fields": [
         "operator",
@@ -7,10 +6,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "university"
     },
-    "terms": []
+    "terms": [],
+    "name": "University"
 }

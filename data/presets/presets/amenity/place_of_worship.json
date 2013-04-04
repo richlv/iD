@@ -1,5 +1,4 @@
 {
-    "name": "place of worship",
     "icon": "place-of-worship",
     "fields": [
         "religion",
@@ -9,6 +8,7 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "terms": [
@@ -38,5 +38,6 @@
     ],
     "tags": {
         "amenity": "place_of_worship"
-    }
+    },
+    "name": "Place of Worship"
 }

@@ -1,5 +1,4 @@
 {
-    "name": "library",
     "icon": "library",
     "fields": [
         "operator",
@@ -8,10 +7,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "library"
     },
-    "terms": []
+    "terms": [],
+    "name": "Library"
 }

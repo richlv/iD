@@ -1,5 +1,4 @@
 {
-    "name": "bicycle parking",
     "icon": "bicycle",
     "fields": [
         "bicycle_parking",
@@ -8,9 +7,11 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "bicycle_parking"
-    }
+    },
+    "name": "Bicycle Parking"
 }

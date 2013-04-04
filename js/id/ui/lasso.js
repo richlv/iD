@@ -1,4 +1,4 @@
-iD.ui.Lasso = function() {
+iD.ui.Lasso = function(context) {
 
     var box, group,
         a = [0, 0],
@@ -6,7 +6,7 @@ iD.ui.Lasso = function() {
 
     function lasso(selection) {
 
-        d3.select('#iD').classed('lasso', true);
+        context.container().classed('lasso', true);
 
         group = selection.append('g')
             .attr('class', 'lasso hide');
@@ -55,7 +55,7 @@ iD.ui.Lasso = function() {
                 d3.select(this).remove();
             }));
         }
-        d3.select('#iD').classed('lasso', false);
+        context.container().classed('lasso', false);
     };
 
     return lasso;

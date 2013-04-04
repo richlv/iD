@@ -1,17 +1,9 @@
 {
-    "name": "building",
     "icon": "warehouse",
     "fields": [
         "building_yes",
-        "levels"
-    ],
-    "additional": [
-        "address",
-        "telephone",
-        "website",
-        "wikipedia",
-        "elevation",
-        "source"
+        "levels",
+        "address"
     ],
     "geometry": [
         "area"
@@ -19,5 +11,6 @@
     "tags": {
         "building": "*"
     },
-    "terms": []
+    "terms": [],
+    "name": "Building"
 }

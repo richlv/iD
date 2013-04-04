@@ -1,5 +1,4 @@
 {
-    "name": "weir",
     "icon": "dam",
     "geometry": [
         "vertex",
@@ -7,5 +6,6 @@
     ],
     "tags": {
         "waterway": "weir"
-    }
+    },
+    "name": "Weir"
 }

@@ -1,9 +1,13 @@
-iD.Background = function() {
+iD.Background = function(backgroundType) {
+
+    backgroundType = backgroundType || 'layer';
+
     var tileSize = 256,
         tile = d3.geo.tile(),
         projection,
         cache = {},
         offset = [0, 0],
+        offsets = {},
         tileOrigin,
         z,
         transformProp = iD.util.prefixCSSProperty('Transform'),
@@ -45,14 +49,14 @@ iD.Background = function() {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
-        tile.scale(projection.scale())
+        tile.scale(projection.scale() * 2 * Math.PI)
             .translate(projection.translate());
 
         tileOrigin = [
-            projection.scale() / 2 - projection.translate()[0],
-            projection.scale() / 2 - projection.translate()[1]];
+            projection.scale() * Math.PI - projection.translate()[0],
+            projection.scale() * Math.PI - projection.translate()[1]];
 
-        z = Math.max(Math.log(projection.scale()) / Math.log(2) - 8, 0);
+        z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
 
         render(selection);
     }
@@ -135,6 +139,7 @@ iD.Background = function() {
     background.offset = function(_) {
         if (!arguments.length) return offset;
         offset = _;
+        if (source.data) offsets[source.data.name] = offset;
         return background;
     };
 
@@ -156,26 +161,33 @@ iD.Background = function() {
         return background;
     };
 
-    function setPermalink(source) {
-        var tag = source.data.sourcetag;
+    function setHash(source) {
+        var tag = source.data && source.data.sourcetag;
         var q = iD.util.stringQs(location.hash.substring(1));
         if (tag) {
-            location.replace('#' + iD.util.qsString(_.assign(q, {
-                layer: tag
-            }), true));
+            q[backgroundType] = tag;
+            location.replace('#' + iD.util.qsString(q, true));
         } else {
-            location.replace('#' + iD.util.qsString(_.omit(q, 'layer'), true));
+            location.replace('#' + iD.util.qsString(_.omit(q, backgroundType), true));
         }
     }
+
+    background.dispatch = d3.dispatch('change');
 
     background.source = function(_) {
         if (!arguments.length) return source;
         source = _;
+        if (source.data) {
+            offset = offsets[source.data.name] = offsets[source.data.name] || [0, 0];
+        } else {
+            offset = [0, 0];
+        }
         cache = {};
         tile.scaleExtent((source.data && source.data.scaleExtent) || [1, 20]);
-        setPermalink(source);
+        setHash(source);
+        background.dispatch.change();
         return background;
     };
 
-    return background;
+    return d3.rebind(background, background.dispatch, 'on');
 };

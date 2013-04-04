@@ -1,5 +1,4 @@
 {
-    "name": "river",
     "icon": "waterway-river",
     "geometry": [
         "line"
@@ -21,5 +20,6 @@
     ],
     "tags": {
         "waterway": "river"
-    }
+    },
+    "name": "River"
 }

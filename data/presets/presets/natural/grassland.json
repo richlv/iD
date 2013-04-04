@@ -1,5 +1,4 @@
 {
-    "name": "grassland",
     "geometry": [
         "point",
         "area"
@@ -7,5 +6,6 @@
     "terms": [],
     "tags": {
         "natural": "grassland"
-    }
+    },
+    "name": "Grassland"
 }

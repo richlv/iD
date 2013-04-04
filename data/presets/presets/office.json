@@ -1,5 +1,4 @@
 {
-    "name": "office",
     "icon": "commercial",
     "fields": [
         "office",
@@ -8,10 +7,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "office": "*"
     },
-    "terms": []
+    "terms": [],
+    "name": "Office"
 }

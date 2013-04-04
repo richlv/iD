@@ -1,7 +1,7 @@
 {
-    "name": "foot path",
     "icon": "highway-footway",
     "fields": [
+        "structure",
         "access",
         "surface"
     ],
@@ -36,5 +36,6 @@
     ],
     "tags": {
         "highway": "footway"
-    }
+    },
+    "name": "Foot Path"
 }

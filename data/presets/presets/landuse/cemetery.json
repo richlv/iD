@@ -1,5 +1,4 @@
 {
-    "name": "cemetery",
     "icon": "cemetery",
     "geometry": [
         "point",
@@ -8,5 +7,6 @@
     "tags": {
         "landuse": "cemetery"
     },
-    "terms": []
+    "terms": [],
+    "name": "Cemetery"
 }

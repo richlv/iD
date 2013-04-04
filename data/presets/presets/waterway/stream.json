@@ -1,6 +1,5 @@
 {
-    "name": "stream",
-    "icon": "waterway-river",
+    "icon": "waterway-stream",
     "fields": [
         "layer"
     ],
@@ -36,5 +35,6 @@
     ],
     "tags": {
         "waterway": "stream"
-    }
+    },
+    "name": "Stream"
 }

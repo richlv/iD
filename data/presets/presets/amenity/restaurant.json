@@ -1,5 +1,4 @@
 {
-    "name": "restaurant",
     "icon": "restaurant",
     "fields": [
         "cuisine",
@@ -8,6 +7,7 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "terms": [
@@ -45,5 +45,6 @@
     ],
     "tags": {
         "amenity": "restaurant"
-    }
+    },
+    "name": "Restaurant"
 }

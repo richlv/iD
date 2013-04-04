@@ -1,5 +1,4 @@
 {
-    "name": "bicycle rental",
     "icon": "bicycle",
     "fields": [
         "capacity",
@@ -8,9 +7,11 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "bicycle_rental"
-    }
+    },
+    "name": "Bicycle Rental"
 }

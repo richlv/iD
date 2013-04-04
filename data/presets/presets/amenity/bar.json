@@ -1,5 +1,4 @@
 {
-    "name": "bar",
     "icon": "bar",
     "fields": [
         "building_area",
@@ -7,10 +6,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "bar"
     },
-    "terms": []
+    "terms": [],
+    "name": "Bar"
 }

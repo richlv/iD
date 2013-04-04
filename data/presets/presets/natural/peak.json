@@ -1,5 +1,4 @@
 {
-    "name": "peak",
     "icon": "triangle",
     "fields": [
         "elevation"
@@ -25,5 +24,6 @@
         "summit",
         "tip",
         "top"
-    ]
+    ],
+    "name": "Peak"
 }

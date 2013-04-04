@@ -1,9 +1,8 @@
 {
-    "name": "unclassified",
-    "icon": "highway",
+    "icon": "highway-unclassified",
     "fields": [
         "oneway",
-        "roadtype",
+        "structure",
         "access",
         "maxspeed",
         "surface"
@@ -14,5 +13,6 @@
     "tags": {
         "highway": "unclassified"
     },
-    "terms": []
+    "terms": [],
+    "name": "Unclassified Road"
 }

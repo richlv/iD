@@ -1,5 +1,4 @@
 {
-    "name": "lake",
     "geometry": [
         "area"
     ],
@@ -11,5 +10,7 @@
         "lakelet",
         "loch",
         "mere"
-    ]
+    ],
+    "icon": "water",
+    "name": "Lake"
 }

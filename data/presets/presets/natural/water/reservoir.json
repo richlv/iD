@@ -1,5 +1,4 @@
 {
-    "name": "reservoir",
     "geometry": [
         "area"
     ],
@@ -7,5 +6,6 @@
         "natural": "water",
         "water": "reservoir"
     },
-    "terms": []
+    "icon": "water",
+    "name": "Reservoir"
 }

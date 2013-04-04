@@ -1,5 +1,4 @@
 {
-    "name": "pub",
     "icon": "beer",
     "fields": [
         "building_area",
@@ -7,10 +6,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "pub"
     },
-    "terms": []
+    "terms": [],
+    "name": "Pub"
 }

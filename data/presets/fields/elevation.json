@@ -1,5 +1,7 @@
 {
     "key": "ele",
     "type": "number",
-    "universal": true
+    "icon": "elevation",
+    "universal": true,
+    "label": "Elevation"
 }

@@ -1,5 +1,4 @@
 {
-    "name": "sport pitch",
     "icon": "pitch",
     "fields": [
         "sport",
@@ -12,5 +11,6 @@
     "tags": {
         "leisure": "pitch"
     },
-    "terms": []
+    "terms": [],
+    "name": "Sport Pitch"
 }

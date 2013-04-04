@@ -1,5 +1,4 @@
 {
-    "name": "locality",
     "icon": "marker",
     "geometry": [
         "point",
@@ -7,5 +6,6 @@
     ],
     "tags": {
         "place": "locality"
-    }
+    },
+    "name": "Locality"
 }

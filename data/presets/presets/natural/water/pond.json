@@ -1,5 +1,4 @@
 {
-    "name": "pond",
     "geometry": [
         "area"
     ],
@@ -13,5 +12,7 @@
         "tarn",
         "pool",
         "mere"
-    ]
+    ],
+    "icon": "water",
+    "name": "Pond"
 }

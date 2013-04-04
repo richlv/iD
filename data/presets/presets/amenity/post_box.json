@@ -1,12 +1,12 @@
 {
-    "name": "post box",
     "icon": "post",
     "fields": [
         "operator",
         "collection_times"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "amenity": "post_box"
@@ -18,5 +18,6 @@
         "mailbox",
         "pillar box",
         "postbox"
-    ]
+    ],
+    "name": "Mailbox"
 }

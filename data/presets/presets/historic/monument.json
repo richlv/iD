@@ -1,11 +1,12 @@
 {
-    "name": "monument",
     "icon": "monument",
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "historic": "monument"
-    }
+    },
+    "name": "Monument"
 }

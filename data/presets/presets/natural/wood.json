@@ -1,5 +1,4 @@
 {
-    "name": "wood",
     "fields": [
         "wood"
     ],
@@ -11,5 +10,6 @@
     "tags": {
         "natural": "wood"
     },
-    "terms": []
+    "terms": [],
+    "name": "Wood"
 }

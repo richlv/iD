@@ -1,7 +1,6 @@
 {
     "key": "building",
     "type": "combo",
-    "default": {
-        "area": "yes"
-    }
+    "default": "yes",
+    "label": "Building"
 }

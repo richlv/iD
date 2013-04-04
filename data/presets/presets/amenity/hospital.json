@@ -1,5 +1,4 @@
 {
-    "name": "hospital",
     "icon": "hospital",
     "fields": [
         "emergency",
@@ -8,6 +7,7 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "terms": [
@@ -27,5 +27,6 @@
     ],
     "tags": {
         "amenity": "hospital"
-    }
+    },
+    "name": "Hospital"
 }

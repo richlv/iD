@@ -1,5 +1,4 @@
 {
-    "name": "baseball diamond",
     "icon": "baseball",
     "geometry": [
         "point",
@@ -9,5 +8,6 @@
         "leisure": "pitch",
         "sport": "baseball"
     },
-    "terms": []
+    "terms": [],
+    "name": "Baseball Diamond"
 }

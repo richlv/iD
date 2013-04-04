@@ -1,5 +1,4 @@
 {
-    "name": "water",
     "fields": [
         "water"
     ],
@@ -9,5 +8,6 @@
     "tags": {
         "natural": "water"
     },
-    "terms": []
+    "icon": "water",
+    "name": "Water"
 }

@@ -1,27 +1,30 @@
 iD.Map = function(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
-        projection = d3.geo.mercator().scale(1024),
+        projection = d3.geo.mercator().scale(512 / Math.PI),
         roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
-            .scale(projection.scale())
+            .scale(projection.scale() * 2 * Math.PI)
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
         transformStart,
         minzoom = 0,
-        background = iD.Background()
-            .projection(projection),
+        layers = [
+            iD.Background().projection(projection),
+            iD.LocalGpx(context).projection(projection),
+            iD.Background('overlay').projection(projection)
+            ],
         transformProp = iD.util.prefixCSSProperty('Transform'),
         points = iD.svg.Points(roundedProjection, context),
         vertices = iD.svg.Vertices(roundedProjection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(roundedProjection),
         midpoints = iD.svg.Midpoints(roundedProjection),
-        labels = iD.svg.Labels(roundedProjection),
+        labels = iD.svg.Labels(roundedProjection, context),
         tail = iD.ui.Tail(),
-        surface, tilegroup;
+        surface, layergroup;
 
     function map(selection) {
         context.history()
@@ -29,8 +32,8 @@ iD.Map = function(context) {
 
         selection.call(zoom);
 
-        tilegroup = selection.append('div')
-            .attr('id', 'tile-g');
+        layergroup = selection.append('div')
+            .attr('id', 'layer-g');
 
         var supersurface = selection.append('div')
             .style('position', 'absolute');
@@ -47,10 +50,9 @@ iD.Map = function(context) {
             .attr('id', 'surface')
             .call(iD.svg.Surface());
 
-
         map.size(selection.size());
         map.surface = surface;
-        map.tilesurface = tilegroup;
+        map.layersurface = layergroup;
 
         supersurface
             .call(tail);
@@ -71,11 +73,24 @@ iD.Map = function(context) {
             all = _.compact(_.values(complete));
             filter = function(d) {
                 if (d.type === 'midpoint') {
-                    var a = graph.entity(d.edge[0]),
-                        b = graph.entity(d.edge[1]);
-                    return !a || !b ||
-                        _.intersection(graph.parentWays(a), all).length ||
-                        _.intersection(graph.parentWays(b), all).length;
+
+                    var a = d.edge[0],
+                        b = d.edge[1];
+
+                    // redraw a midpoint if it needs to be
+                    // - moved (either edge node moved)
+                    // - deleted (edge nodes not consecutive in any parent way)
+                    if (a in complete || b in complete) return true;
+
+                    var parentsWays = graph.parentWays({ id: a });
+                    for (var i = 0; i < parentsWays.length; i++) {
+                        var nodes = parentsWays[i].nodes;
+                        for (var n = 0; n < nodes.length; n++) {
+                            if (nodes[n] === a && (nodes[n - 1] === b || nodes[n + 1] === b)) return false;
+                        }
+                    }
+                    return true;
+
                 } else {
                     return d.id in complete;
                 }
@@ -103,7 +118,7 @@ iD.Map = function(context) {
     function zoomPan() {
         if (d3.event && d3.event.sourceEvent.type === 'dblclick') {
             if (!dblclickEnabled) {
-                zoom.scale(projection.scale())
+                zoom.scale(projection.scale() * 2 * Math.PI)
                     .translate(projection.translate());
                 return d3.event.sourceEvent.preventDefault();
             }
@@ -112,13 +127,13 @@ iD.Map = function(context) {
         if (Math.log(d3.event.scale / Math.LN2 - 8) < minzoom + 1) {
             iD.ui.flash(context.container())
                 .select('.content')
-                .text('Cannot zoom out further in current mode.');
+                .text(t('cannot_zoom'));
             return setZoom(16, true);
         }
 
         projection
             .translate(d3.event.translate)
-            .scale(d3.event.scale);
+            .scale(d3.event.scale / (2 * Math.PI));
 
         var ascale = d3.event.scale;
         var bscale = transformStart[0];
@@ -131,7 +146,7 @@ iD.Map = function(context) {
             'scale(' + scale + ')' +
             'translate(' + tX + 'px,' + tY + 'px) ';
 
-        tilegroup.style(transformProp, transform);
+        layergroup.style(transformProp, transform);
         surface.style(transformProp, transform);
         queueRedraw();
 
@@ -142,7 +157,7 @@ iD.Map = function(context) {
         var prop = surface.node().style[transformProp];
         if (!prop || prop === 'none') return false;
         surface.node().style[transformProp] = '';
-        tilegroup.node().style[transformProp] = '';
+        layergroup.node().style[transformProp] = '';
         return true;
     }
 
@@ -165,7 +180,18 @@ iD.Map = function(context) {
         }
 
         if (!difference) {
-            tilegroup.call(background);
+            var sel = layergroup
+                .selectAll('.layer-layer')
+                .data(layers);
+
+            sel.exit().remove();
+
+            sel.enter().append('div')
+                .attr('class', 'layer-layer');
+
+            sel.each(function(layer) {
+                    d3.select(this).call(layer);
+                });
         }
 
         if (map.editable()) {
@@ -176,7 +202,7 @@ iD.Map = function(context) {
         }
 
         transformStart = [
-            projection.scale(),
+            projection.scale() * 2 * Math.PI,
             projection.translate().slice()];
 
         return map;
@@ -190,13 +216,13 @@ iD.Map = function(context) {
 
     function pointLocation(p) {
         var translate = projection.translate(),
-            scale = projection.scale();
+            scale = projection.scale() * 2 * Math.PI;
         return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
     }
 
     function locationPoint(l) {
         var translate = projection.translate(),
-            scale = projection.scale();
+            scale = projection.scale() * 2 * Math.PI;
         return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
     }
 
@@ -222,8 +248,8 @@ iD.Map = function(context) {
             center = pxCenter(),
             l = pointLocation(center);
         scale = Math.max(1024, Math.min(256 * Math.pow(2, 24), scale));
-        projection.scale(scale);
-        zoom.scale(projection.scale());
+        projection.scale(scale / (2 * Math.PI));
+        zoom.scale(scale);
         var t = projection.translate();
         l = locationPoint(l);
         t[0] += center[0] - l[0];
@@ -252,6 +278,7 @@ iD.Map = function(context) {
         t[1] += d[1];
         projection.translate(t);
         zoom.translate(projection.translate());
+        dispatch.move(map);
         return redraw();
     };
 
@@ -260,7 +287,9 @@ iD.Map = function(context) {
         var center = map.center();
         dimensions = _;
         surface.size(dimensions);
-        background.size(dimensions);
+        layers.map(function(l) {
+            l.size(dimensions);
+        });
         projection.clipExtent([[0, 0], dimensions]);
         setCenter(center);
         return redraw();
@@ -283,7 +312,7 @@ iD.Map = function(context) {
 
     map.zoom = function(z) {
         if (!arguments.length) {
-            return Math.max(Math.log(projection.scale()) / Math.LN2 - 8, 0);
+            return Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.LN2 - 8, 0);
         }
 
         if (setZoom(z)) {
@@ -371,7 +400,7 @@ iD.Map = function(context) {
         return map;
     };
 
-    map.background = background;
+    map.layers = layers;
     map.projection = projection;
     map.redraw = redraw;
 

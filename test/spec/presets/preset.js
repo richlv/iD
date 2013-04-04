@@ -1,50 +1,21 @@
 describe('iD.presets.Preset', function() {
 
-    var fields = {
-        "building_area": {
-            "key": "building",
-            "type": "check",
-            "default": { "area": "yes" }
-        }
-    };
+    var fields, p;
 
-    var p = {
-        other: iD.presets.Preset({
-            name: 'other',
-            tags: {},
-            geometry: ['point', 'vertex', 'line', 'area']
-        }),
-        residential: iD.presets.Preset({
-            name: 'residential',
-            tags: {
-                highway: 'residential'
-            },
-            geometry: ['line']
-        }),
-        tennis: iD.presets.Preset({
-            name: 'tennis',
-            tags: {
-                leisure: 'pitch',
-                sport: 'tennis'
-            },
-            geometry: ['area']
-        }),
-        building: iD.presets.Preset({
-            name: 'building',
-            tags: {
-                building: '*'
-            },
-            geometry: ['area']
-        }),
-        cafe: iD.presets.Preset({
-            name: 'cafe',
-            tags: {
-                amenity: 'cafe'
-            },
-            geometry: ['point', 'area'],
-            fields: ['building_area']
-        }, fields)
-    };
+    beforeEach(function() {
+        if (!p) {
+            fields = {};
+            var i = 0;
+            for (i in iD.data.presets.fields) {
+                fields[i] = iD.presets.Field(i, iD.data.presets.fields[i]);
+            }
+            p = {};
+            for (i in iD.data.presets.presets) {
+                p[i] = iD.presets.Preset(i, iD.data.presets.presets[i], fields);
+            }
+        }
+    });
+
      var w1 = iD.Way({ tags: {
             highway: 'motorway'
         }}),
@@ -68,9 +39,9 @@ describe('iD.presets.Preset', function() {
 
     describe('#matchGeometry', function() {
         var n = iD.Node();
-        var g = iD.Graph().replace(p);
+        var g = iD.Graph().replace(n);
         it("returns false if it doesn't match the entity type", function() {
-            expect(p.residential.matchGeometry(n, g)).to.equal(false);
+            expect(p['highway/residential'].matchGeometry(n, g)).to.equal(false);
         });
 
         it("returns true if it does match the entity type", function() {
@@ -80,7 +51,7 @@ describe('iD.presets.Preset', function() {
 
     describe('#matchTags', function() {
        it("returns -1 if preset does not match tags", function() {
-            expect(p.residential.matchTags(w1)).to.equal(-1);
+            expect(p['highway/residential'].matchTags(w1)).to.equal(-1);
         });
 
         it("returns 0 for other preset (no match tags)", function() {
@@ -88,8 +59,8 @@ describe('iD.presets.Preset', function() {
         });
 
         it("returns the number of matched tags", function() {
-            expect(p.residential.matchTags(w3)).to.equal(1);
-            expect(p.tennis.matchTags(w2)).to.equal(2);
+            expect(p['highway/residential'].matchTags(w3)).to.equal(1);
+            expect(p['leisure/pitch/tennis'].matchTags(w2)).to.equal(2);
         });
 
         it("counts * as a match for any value", function() {
@@ -102,28 +73,28 @@ describe('iD.presets.Preset', function() {
     describe('#applyTags', function() {
 
         it("adds match tags", function() {
-            expect(p.residential.applyTags({}, 'area')).to.eql({ highway: 'residential' });
+            expect(p['highway/residential'].applyTags({}, 'area')).to.eql({ highway: 'residential' });
         });
 
         it("does not add wildcard tags", function() {
-            expect(p.building.applyTags({}, 'area')).to.eql({});
+            expect(p.amenity.applyTags({}, 'area')).to.eql({});
         });
 
         it("adds default tags", function() {
-            expect(p.cafe.applyTags({}, 'area')).to.eql({ amenity: 'cafe', building: 'yes'});
-            expect(p.cafe.applyTags({}, 'point')).to.eql({ amenity: 'cafe' });
+            expect(p['amenity/cafe'].applyTags({}, 'area')).to.eql({ amenity: 'cafe', building: 'yes'});
+            expect(p['amenity/cafe'].applyTags({}, 'point')).to.eql({ amenity: 'cafe' });
         });
     });
 
     describe('#removeTags', function() {
 
         it('removes match tags', function() {
-            expect(p.residential.removeTags({ highway: 'residential' }, 'area')).to.eql({});
+            expect(p['highway/residential'].removeTags({ highway: 'residential' }, 'area')).to.eql({});
         });
 
         it('removes default tags', function() {
-            expect(p.cafe.removeTags({ amenity: 'cafe', building: 'yes'}, 'area')).to.eql({});
-            expect(p.cafe.removeTags({ amenity: 'cafe', building: 'yep'}, 'area')).to.eql({ building: 'yep'});
+            expect(p['amenity/cafe'].removeTags({ amenity: 'cafe', building: 'yes'}, 'area')).to.eql({});
+            expect(p['amenity/cafe'].removeTags({ amenity: 'cafe', building: 'yep'}, 'area')).to.eql({ building: 'yep'});
         });
     });
 

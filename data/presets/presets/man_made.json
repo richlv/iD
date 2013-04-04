@@ -1,5 +1,4 @@
 {
-    "name": "man made",
     "fields": [
         "man_made"
     ],
@@ -11,5 +10,6 @@
     ],
     "tags": {
         "man_made": "*"
-    }
+    },
+    "name": "Man Made"
 }

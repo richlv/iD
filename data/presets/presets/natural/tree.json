@@ -1,5 +1,4 @@
 {
-    "name": "tree",
     "fields": [
         "denotation"
     ],
@@ -11,5 +10,6 @@
     "terms": [],
     "tags": {
         "natural": "tree"
-    }
+    },
+    "name": "Tree"
 }

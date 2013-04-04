@@ -1,20 +1,17 @@
 describe("iD.presets.Collection", function() {
 
     var p = {
-        other: iD.presets.Preset({
-            name: 'other',
+        other: iD.presets.Preset('other', {
             tags: {},
             geometry: ['point', 'vertex', 'line', 'area']
         }),
-        residential: iD.presets.Preset({
-            name: 'residential',
+        residential: iD.presets.Preset('highway/residential', {
             tags: {
                 highway: 'residential'
             },
             geometry: ['line']
         }),
-        park: iD.presets.Preset({
-            name: 'park',
+        park: iD.presets.Preset('leisure/park', {
             tags: {
                 leisure: 'park'
             },
@@ -28,8 +25,8 @@ describe("iD.presets.Collection", function() {
         g = iD.Graph().replace(w);
 
     describe("#item", function() {
-        it("fetches a preset by name", function() {
-            expect(c.item('residential')).to.equal(p.residential);
+        it("fetches a preset by id", function() {
+            expect(c.item('highway/residential')).to.equal(p.residential);
         });
     });
 
@@ -57,6 +54,15 @@ describe("iD.presets.Collection", function() {
         it("always includes other", function() {
             expect(c.search("blade of grass").collection.indexOf(p.other) >= 0).to.eql(true);
         });
-    });
 
+        it("excludes presets with searchable: false", function() {
+            var excluded = iD.presets.Preset('excluded', {
+                    tags: {},
+                    geometry: [],
+                    searchable: false
+                }),
+                collection = iD.presets.Collection([excluded, p.other]);
+            expect(collection.search("excluded").collection).not.to.include(excluded);
+        });
+    });
 });

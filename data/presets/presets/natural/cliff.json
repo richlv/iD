@@ -1,5 +1,4 @@
 {
-    "name": "cliff",
     "geometry": [
         "point",
         "vertex",
@@ -9,5 +8,6 @@
     "terms": [],
     "tags": {
         "natural": "cliff"
-    }
+    },
+    "name": "Cliff"
 }

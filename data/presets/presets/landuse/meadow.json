@@ -1,5 +1,4 @@
 {
-    "name": "meadow",
     "geometry": [
         "point",
         "area"
@@ -7,5 +6,6 @@
     "tags": {
         "landuse": "meadow"
     },
-    "terms": []
+    "terms": [],
+    "name": "Meadow"
 }

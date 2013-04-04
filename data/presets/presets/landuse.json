@@ -1,13 +1,14 @@
 {
-    "name": "landuse",
     "fields": [
         "landuse"
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "landuse": "*"
-    }
+    },
+    "name": "Landuse"
 }

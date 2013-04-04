@@ -1,5 +1,4 @@
 {
-    "name": "pharmacy",
     "icon": "pharmacy",
     "fields": [
         "operator",
@@ -8,10 +7,12 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "pharmacy"
     },
-    "terms": []
+    "terms": [],
+    "name": "Pharmacy"
 }

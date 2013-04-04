@@ -11,7 +11,10 @@ iD.ui.RadialMenu = function(operations) {
 
         function click(operation) {
             d3.event.stopPropagation();
+            if (operation.disabled())
+                return;
             operation();
+            radialMenu.close();
         }
 
         menu = selection.append('g')
@@ -48,7 +51,7 @@ iD.ui.RadialMenu = function(operations) {
         button.append('circle')
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .attr('r', 15)
-            .classed('disabled', function(d) { return !d.enabled(); })
+            .classed('disabled', function(d) { return d.disabled(); })
             .on('click', click)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
@@ -56,7 +59,7 @@ iD.ui.RadialMenu = function(operations) {
         button.append('use')
             .attr('transform', 'translate(-10, -10)')
             .attr('clip-path', 'url(#clip-square-20)')
-            .attr('xlink:href', function(d) { return '#icon-operation-' + d.id; });
+            .attr('xlink:href', function(d) { return '#icon-operation-' + (d.disabled() ? 'disabled-' : '') + d.id; });
 
         tooltip = d3.select(document.body)
             .append('div')
@@ -71,7 +74,7 @@ iD.ui.RadialMenu = function(operations) {
                 .style('left', (r + 25) * Math.sin(angle) + dx + center[0] + 'px')
                 .style('top', (r + 25) * Math.cos(angle) + dy + center[1]+ 'px')
                 .style('display', 'block')
-                .html(iD.ui.tooltipHtml(d.description, d.keys[0]));
+                .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
         }
 
         function mouseout() {

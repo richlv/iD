@@ -1,13 +1,14 @@
 {
-    "name": "tourism",
     "fields": [
         "tourism"
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "tourism": "*"
-    }
+    },
+    "name": "Tourism"
 }

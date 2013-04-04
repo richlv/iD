@@ -1,5 +1,4 @@
 {
-    "name": "basketball court",
     "icon": "basketball",
     "fields": [
         "surface"
@@ -12,5 +11,6 @@
         "leisure": "pitch",
         "sport": "basketball"
     },
-    "terms": []
+    "terms": [],
+    "name": "Basketball Court"
 }

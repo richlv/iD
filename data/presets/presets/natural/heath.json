@@ -1,10 +1,10 @@
 {
-    "name": "heath",
     "geometry": [
         "area"
     ],
     "terms": [],
     "tags": {
         "natural": "heath"
-    }
+    },
+    "name": "Heath"
 }

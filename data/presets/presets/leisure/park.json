@@ -1,5 +1,4 @@
 {
-    "name": "park",
     "icon": "park",
     "geometry": [
         "point",
@@ -29,5 +28,6 @@
     ],
     "tags": {
         "leisure": "park"
-    }
+    },
+    "name": "Park"
 }

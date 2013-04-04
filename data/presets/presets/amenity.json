@@ -1,13 +1,14 @@
 {
-    "name": "amenity",
     "fields": [
         "amenity"
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "tags": {
         "amenity": "*"
-    }
+    },
+    "name": "Amenity"
 }

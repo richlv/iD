@@ -1,5 +1,4 @@
 {
-    "name": "construction",
     "fields": [
         "construction",
         "operator"
@@ -11,5 +10,6 @@
     "tags": {
         "landuse": "construction"
     },
-    "terms": []
+    "terms": [],
+    "name": "Construction"
 }

@@ -1,5 +1,4 @@
 {
-    "name": "golf course",
     "icon": "golf",
     "fields": [
         "operator",
@@ -12,5 +11,6 @@
     "tags": {
         "leisure": "golf_course"
     },
-    "terms": []
+    "terms": [],
+    "name": "Golf Course"
 }

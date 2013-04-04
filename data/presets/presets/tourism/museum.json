@@ -1,5 +1,4 @@
 {
-    "name": "museum",
     "icon": "museum",
     "fields": [
         "operator",
@@ -8,6 +7,7 @@
     ],
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "terms": [
@@ -27,5 +27,6 @@
     ],
     "tags": {
         "tourism": "museum"
-    }
+    },
+    "name": "Museum"
 }

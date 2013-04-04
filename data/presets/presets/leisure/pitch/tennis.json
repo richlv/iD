@@ -1,5 +1,4 @@
 {
-    "name": "tennis court",
     "icon": "tennis",
     "fields": [
         "surface"
@@ -12,5 +11,6 @@
         "leisure": "pitch",
         "sport": "tennis"
     },
-    "terms": []
+    "terms": [],
+    "name": "Tennis Court"
 }

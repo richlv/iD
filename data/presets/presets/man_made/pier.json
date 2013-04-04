@@ -1,10 +1,10 @@
 {
-    "name": "pier",
     "geometry": [
         "line",
         "area"
     ],
     "tags": {
         "man_made": "pier"
-    }
+    },
+    "name": "Pier"
 }
